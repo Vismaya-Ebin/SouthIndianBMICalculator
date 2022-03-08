@@ -1,10 +1,13 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import EditChart  from "../components/EditChart";
+ import ViewChart  from "../components/ViewChart";
 import "../App.css";
 import Fab from "@material-ui/core/Fab";
 import { useFormik } from "formik";
 import * as yup from "yup";
+ import { useNavigate } from "react-router-dom";
+
+
 
 /**Form validation */
 export const formValidationSchema = yup.object({
@@ -29,6 +32,8 @@ export const formValidationSchema = yup.object({
 });
 /** Initial form component with three fields name, age, ht in cm, wt in kg*/
 const Healthchartform = () => {
+   const navigate = useNavigate();
+ 
   /**Array destructuring of useFormik  which have reset ,error etc*/
   const {
     resetForm,
@@ -63,7 +68,9 @@ const saveData = () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(values),
-  });
+  }).then((response) => {
+    navigate("/ViewChart")
+  })
 }
   //  method for calculating BMI [weight (kg) / height (cm) / height (cm)] x 10,000
   const calculateBmi = (values) => {
@@ -83,7 +90,7 @@ const saveData = () => {
       message = "OVER-WEIGHT - Start Healthy Lifestyle 🚴‍♀️ 🏋️‍♀️ 🎾 !!!";
       color = "yelow";
     } else if (answer >= 18.5 && answer < 25) {
-      message = "NORMAL - Configurations 🏆🏆🏆!!!";
+      message = "NORMAL - Congratulations 🏆🏆🏆!!!";
       color = "green";
     } else {
       message = "UNDER-WEIGHT - Start Healthy Lifestyle 🚴‍♀️ 🏋️‍♀️ 🎾!!!";
@@ -164,7 +171,7 @@ const saveData = () => {
           <Fab color="primary" aria-label="add" onClick={resetForm}>
             Reset
           </Fab>
-          <EditChart />
+          {/* <ViewChart /> */}
         </div>
       </form>
     </div>
