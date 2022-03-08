@@ -1,0 +1,17 @@
+[
+    {
+        "id": "1",
+       "fname":"Arya",
+       "age":"56",
+       "height":"178",
+       "weight":"45",
+       "bmi":"23"
+    },
+    {   "id": "2",
+       "fname":"Appu",
+       "age":"15",
+       "height":"123",
+       "weight":"30",
+       "bmi":"23"
+    }
+ ]
