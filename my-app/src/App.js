@@ -35,7 +35,7 @@ function App() {
       });
   }, []);
   let stringData = " Below 18 underweight 18-24 normal 24-29 overweight 29-34 obese 34-39 obese";
-
+/**Data to pass to all components*/
   const obj = { state: stringData };
 
   return (

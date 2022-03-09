@@ -36,6 +36,7 @@ export const formValidationSchema = yup.object({
 
 /** Initial form component with three fields name, age, ht in cm, wt in kg*/
 const EditForm = () => {
+    //To take data from context we have use useContext
  const { state } = useContext(Datacontext);
   const navigate = useNavigate();
   const { id } = useParams();
