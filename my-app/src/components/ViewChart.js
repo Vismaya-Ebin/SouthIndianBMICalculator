@@ -13,14 +13,12 @@ import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useContext, useState, createContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import "../App.css";
 import { Datacontext } from "../App.js";
 export default function ViewChart() {
   /**To use context Value we have to use useContext */
   const { state } = useContext(Datacontext);
-
-  console.log("OBJECT CONTEXT", state);
   const [data, setData] = useState([]);
   const navigation = useNavigate();
   const endpoint = "https://622733532dfa5240181721bf.mockapi.io/healthChart";
@@ -37,8 +35,7 @@ export default function ViewChart() {
     fetch(endpoint + "/" + id, { method: "DELETE" })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Before", data);
-        getDataFromApi();
+       getDataFromApi();
       });
   };
   /**On clickig on edit button navigate to Edit page */

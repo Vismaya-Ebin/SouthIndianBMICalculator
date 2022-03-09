@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import TextField from "@material-ui/core/TextField";
 import "../App.css";
 import Fab from "@material-ui/core/Fab";
@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 import {ViewChart} from '../components/ViewChart';
+import {Datacontext} from '../App';
+
 
 
 /**Form validation */
@@ -34,6 +36,7 @@ export const formValidationSchema = yup.object({
 
 /** Initial form component with three fields name, age, ht in cm, wt in kg*/
 const EditForm = () => {
+ const { state } = useContext(Datacontext);
   const navigate = useNavigate();
   const { id } = useParams();
   const [user, setUser] = useState([]);
@@ -83,7 +86,6 @@ const EditForm = () => {
     enableReinitialize: true,
     onSubmit: (values) => {
       calculateBmi(values);
-      console.log("Values on Submit", values);
       saveData(values);
     },
   });
@@ -180,6 +182,7 @@ const EditForm = () => {
           {values && values.height && values.weight ? calculateBmi(values) : ""}
         </h1>
         <h2 style={{ color: color }}>{message}</h2>
+        <p>{state}</p>
         <div className="home-css">
           <Fab
             color="primary"
@@ -190,7 +193,7 @@ const EditForm = () => {
             Edit
           </Fab>
           
-          {/* <ViewChart /> */}
+         
         </div>
       </form>
     </div>
