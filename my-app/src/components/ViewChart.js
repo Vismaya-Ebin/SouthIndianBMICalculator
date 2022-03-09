@@ -12,11 +12,13 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { useNavigate } from "react-router-dom";
 import { useEffect,useContext, useState, createContext } from "react";
 import '../App.css';
 export default function ViewChart() {
 
   const [data, setData] = useState([]);
+  const navigation = useNavigate()
   const endpoint="https://622733532dfa5240181721bf.mockapi.io/healthChart";
 /**Data which need to show in table */
   const getDataFromApi=() => {
@@ -28,6 +30,7 @@ export default function ViewChart() {
      
     })
   }
+  /**Delete */
 const deleteData = (id) => {
   alert(id)
   fetch(endpoint+"/"+id, { method: "DELETE" })
@@ -37,6 +40,10 @@ const deleteData = (id) => {
       getDataFromApi();
      
     });
+}
+/**On clickig on edit button navigate to Edit page */
+const editData=(id)=>{
+  navigation("/edit/"+id);
 }
   useEffect(() => {
     getDataFromApi();
@@ -90,7 +97,7 @@ const deleteData = (id) => {
       </ListItem>
       <div className="home-css">
      
-      <Fab  size="small" color="secondary" aria-label="add">
+      <Fab  size="small" color="secondary" aria-label="add" onClick={()=>{editData(item.id)}}>
       <EditIcon />
       </Fab>
       <Fab   size="small"color="secondary" aria-label="edit" onClick={()=>{deleteData(item.id)}}>
